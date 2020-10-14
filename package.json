@@ -2,6 +2,16 @@
   "name": "react-render-prop",
   "version": "0.0.1",
   "description": "Helper React hook to consume and flatten render-props",
+  "keywords": [
+    "react",
+    "render-props",
+    "react-hooks",
+    "hooks",
+    "stateless",
+    "functional",
+    "hoist",
+    "composition"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
