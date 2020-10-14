@@ -4,7 +4,7 @@
   "description": "Helper React hook to consume and flatten render-props",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "rimraf dist && tsc --outDir dist"
+    "dist": "rimraf dist && tsc --outDir dist && cp src/exports.ts dist/index.d.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/beamworks/react-render-prop#readme",
   "devDependencies": {
+    "@types/react": "^16.9.52",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.0"
