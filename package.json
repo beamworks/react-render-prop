@@ -1,0 +1,18 @@
+{
+  "name": "react-render-prop",
+  "version": "0.0.1",
+  "description": "Helper React hook to consume and flatten render-props",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beamworks/react-render-prop.git"
+  },
+  "author": "Nick Matantsev <nick.matantsev@beamworks.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beamworks/react-render-prop/issues"
+  },
+  "homepage": "https://github.com/beamworks/react-render-prop#readme"
+}
