@@ -25,7 +25,7 @@ function MyComponent() {
 
 ## Rationale
 
-In React code, the render-props pattern is a standard way to let a component pass data to the outside. For example:
+In React code, the render-props pattern is a popular way to have a sub-component return some data to the calling code. For example:
 
 ```jsx
 function MyComponent() {
@@ -45,13 +45,16 @@ However, we often need to "hoist" those returned values back up to the top-level
 after the first render is completed, we want to collect those values exposed to the render-prop body and then
 re-render MyComponent - this time with awareness of that returned data.
 
+Essentially, we want to be able to place a `useEffect` inside render-prop content (to detect new arg values)
+plus a `useState` at the top-level to receive and store those values.
+
 This library is a convenient helper hook to accomplish that. The hook is invoked with no parameters and returns
 an array with the following:
 
 - **render-prop "sink" callback** - insert this where render-prop body would normally go
 - **values collected from the "sink"** - whatever the component passes to render-prop body will be exposed here
 
-So, if the render-prop component passes `valueA` and `valueB` to the function, do this:
+So, if the render-prop component is designed to pass `valueA` and `valueB` to the prop content function, do this:
 
 ```jsx
 const [libraryWidgetSink, valueA, valueB] = useRenderProp();
@@ -65,7 +68,7 @@ And then when rendering the render-prop component, pass the "sink" callback to i
 </LibraryWidget>
 ```
 
-This works for components that use other kinds of render-props than function-as-a-child:
+This works for components that use other kinds of render-props, not just function-as-a-child:
 
 ```jsx
 <LibraryWidget someRenderProp={libraryWidgetSink} />
@@ -75,9 +78,9 @@ The "sink" callback produced by this helper hook will always return a React elem
 the component render-prop expects a function that returns React content, you can put that "sink"
 in there. Just make sure to not use the same callback in two different spots or inside a loop.
 
-**Infinite render loop warning:** be aware that this hook triggers a re-render any time the
-values passed to the "sink" change. If the render-prop component passes a new instance of an
-object into the "sink" on every render, then the "sink" will keep scheduling more and more
-re-renders of the top-level component, causing an infinite render loop. This can be fixed
-via memoization for now, but there is a plan to add a "toDeps" parameter to the hook for
-explicit control.
+> **Infinite render loop warning:** be aware that this hook triggers a re-render any time the
+> values passed to the "sink" change. If the render-prop component passes a new instance of an
+> object into the "sink" on every render, then the "sink" will keep scheduling more and more
+> re-renders of the top-level component, causing an infinite render loop. This can be fixed
+> via memoization for now, but there is a plan to add a "toDeps" parameter to the hook for
+> explicit control.
